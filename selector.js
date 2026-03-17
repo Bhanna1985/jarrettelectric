@@ -36,7 +36,11 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 1; i <= 6; i++) {
 
       const cell = document.createElement("div");
+
+      // 🔒 GOLD GRID STYLE
       cell.style.border = "1px solid gold";
+      cell.style.boxSizing = "border-box";
+
       cell.style.display = "flex";
       cell.style.alignItems = "center";
       cell.style.justifyContent = "center";
