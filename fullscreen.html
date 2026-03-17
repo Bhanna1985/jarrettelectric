@@ -21,19 +21,48 @@ width:100%;
 display:block;
 }
 
-.imageZone{
+/* MAIN SCROLLABLE CONTENT AREA */
+.contentZone{
 position:absolute;
-top:350px;
-left:200px;
-width:800px;
-height:600px;
+top:360px;
+left:100px;
+width:1000px;
+height:700px;
 }
 
-.backButton{
+/* NAV BUTTON ZONES */
+.backConcept{
 position:absolute;
-top:250px;
-left:450px;
-width:300px;
+top:240px;
+left:60px;
+width:220px;
+height:80px;
+cursor:pointer;
+}
+
+.backSelector{
+position:absolute;
+top:240px;
+left:330px;
+width:260px;
+height:80px;
+cursor:pointer;
+}
+
+.nextPage{
+position:absolute;
+top:240px;
+left:650px;
+width:260px;
+height:80px;
+cursor:pointer;
+}
+
+.nextConcept{
+position:absolute;
+top:240px;
+left:950px;
+width:220px;
 height:80px;
 cursor:pointer;
 }
@@ -46,11 +75,14 @@ cursor:pointer;
 
 <img src="assets/Full_View_Template.png" class="template">
 
-<!-- BACK BUTTON -->
-<div class="backButton"></div>
+<!-- BUTTON OVERLAYS -->
+<div class="backConcept"></div>
+<div class="backSelector"></div>
+<div class="nextPage"></div>
+<div class="nextConcept"></div>
 
-<!-- MAIN IMAGE AREA -->
-<div class="imageZone"></div>
+<!-- MAIN CONTENT AREA -->
+<div class="contentZone"></div>
 
 </div>
 
