@@ -9,12 +9,13 @@ fetch('data/concepts.json')
     { top: 300, left: 360 },
     { top: 300, left: 640 },
     { top: 300, left: 920 },
-
     { top: 620, left: 80 },
     { top: 620, left: 360 },
     { top: 620, left: 640 },
     { top: 620, left: 920 }
   ];
+
+  const fragment = document.createDocumentFragment();
 
   concepts.forEach((c, index) => {
 
@@ -37,29 +38,29 @@ fetch('data/concepts.json')
     preview.style.justifyContent = "center";
     preview.style.overflow = "hidden";
 
-    const img = document.createElement("img");
-
-    img.src = `Concepts/Concept_${conceptNum}/images/Concept_${conceptNum}_01.png`;
-
+    const img = new Image();
+    img.src = "Concepts/Concept_" + conceptNum + "/images/Concept_" + conceptNum + "_01.png";
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "cover";
 
-    img.onload = () => {
+    img.onload = function() {
       preview.appendChild(img);
     };
 
-    img.onerror = () => {
+    img.onerror = function() {
       preview.innerHTML = "<div style='color:gold;'>Coming Soon</div>";
     };
 
-    tile.onclick = () => {
-      window.location.href = `preview.html?concept=${c.id}`;
+    tile.onclick = function() {
+      window.location.href = "preview.html?concept=" + c.id;
     };
 
     tile.appendChild(preview);
-    container.appendChild(tile);
+    fragment.appendChild(tile);
 
   });
+
+  container.appendChild(fragment);
 
 });
