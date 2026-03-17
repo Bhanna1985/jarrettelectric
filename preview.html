@@ -16,7 +16,7 @@ position:relative;
 width:1200px;
 }
 
-.template{
+svg{
 width:100%;
 display:block;
 }
@@ -43,24 +43,33 @@ cursor:pointer;
 
 <div class="container">
 
-<img src="assets/Preview_Template.png" class="template">
+<div id="svgContainer"></div>
 
-<!-- BACK BUTTON -->
 <div class="backButton"></div>
 
-<!-- ROW 1 -->
 <div class="zone" style="top:360px; left:120px;"></div>
 <div class="zone" style="top:360px; left:680px;"></div>
 
-<!-- ROW 2 -->
 <div class="zone" style="top:740px; left:120px;"></div>
 <div class="zone" style="top:740px; left:680px;"></div>
 
-<!-- ROW 3 -->
 <div class="zone" style="top:1120px; left:120px;"></div>
 <div class="zone" style="top:1120px; left:680px;"></div>
 
 </div>
+
+<script>
+fetch('assets/Preview.svg')
+.then(res => res.text())
+.then(svg => {
+document.getElementById('svgContainer').innerHTML = svg;
+
+const numbers = document.querySelectorAll('#conceptNumber');
+numbers.forEach((el, index) => {
+el.textContent = index + 1;
+});
+});
+</script>
 
 </body>
 </html>
