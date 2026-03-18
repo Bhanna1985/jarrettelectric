@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     preview.style.position = "relative";
     preview.style.width = "240px";
     preview.style.height = "240px";
-    preview.style.backgroundImage = "url('assets/tile_template.png')";
+    preview.style.backgroundImage = "url('/jarrettelectric/assets/tile_template.png')";
     preview.style.backgroundSize = "100% 100%";
 
     for (let s = 1; s <= 6; s++) {
