@@ -1,14 +1,14 @@
 const slots = [
-  { top: 10, left: 10, width: 104, height: 66 },
-  { top: 10, left: 124, width: 104, height: 66 },
-  { top: 86, left: 10, width: 104, height: 66 },
-  { top: 86, left: 124, width: 104, height: 66 },
-  { top: 162, left: 10, width: 104, height: 66 },
-  { top: 162, left: 124, width: 104, height: 66 }
+  { top: 8, left: 8, width: 108, height: 68 },
+  { top: 8, left: 124, width: 108, height: 68 },
+  { top: 86, left: 8, width: 108, height: 68 },
+  { top: 86, left: 124, width: 108, height: 68 },
+  { top: 164, left: 8, width: 108, height: 68 },
+  { top: 164, left: 124, width: 108, height: 68 }
 ]
 
-const SLOT_WIDTH = 104
-const SLOT_HEIGHT = 66
+const SLOT_WIDTH = 108
+const SLOT_HEIGHT = 68
 
 const positions = [
   { top: 300, left: 80 },
