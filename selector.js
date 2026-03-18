@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const container = document.querySelector(".container");
   if (!container) return;
 
+  container.innerHTML = "";
+
   const positions = [
     { top: 300, left: 80 },
     { top: 300, left: 360 },
@@ -14,6 +16,18 @@ document.addEventListener("DOMContentLoaded", function() {
     { top: 620, left: 920 }
   ];
 
+  const slots = [
+    { top: 12, left: 12 },
+    { top: 12, left: 126 },
+    { top: 88, left: 12 },
+    { top: 88, left: 126 },
+    { top: 164, left: 12 },
+    { top: 164, left: 126 }
+  ];
+
+  const SLOT_WIDTH = 102;
+  const SLOT_HEIGHT = 64;
+
   function loadImage(src) {
     return new Promise(resolve => {
       const img = new Image();
@@ -23,7 +37,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  function buildTile(i) {
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 1; i <= positions.length; i++) {
 
     const conceptNum = String(i).padStart(3, "0");
 
@@ -44,61 +60,58 @@ document.addEventListener("DOMContentLoaded", function() {
     preview.style.backgroundImage = "url('assets/tile_template.png')";
     preview.style.backgroundSize = "100% 100%";
 
-    // 🔥 AUTO CALCULATED GRID
-    const GRID_COLS = 2;
-    const GRID_ROWS = 3;
+    for (let s = 1; s <= 6; s++) {
 
-    const TILE_SIZE = 240;
+      const slot = document.createElement("div");
+      slot.style.position = "absolute";
+      slot.style.top = slots[s - 1].top + "px";
+      slot.style.left = slots[s - 1].left + "px";
+      slot.style.width = SLOT_WIDTH + "px";
+      slot.style.height = SLOT_HEIGHT + "px";
 
-    // Estimate border + spacing automatically
-    const OUTER_MARGIN = 10; // tweak if needed later
-    const INNER_GAP = 10;    // tweak if needed later
+      // 🔒 HARD LOCK CENTERING
+      slot.style.display = "flex";
+      slot.style.alignItems = "center";
+      slot.style.justifyContent = "center";
 
-    const usableWidth = TILE_SIZE - (OUTER_MARGIN * 2) - INNER_GAP;
-    const usableHeight = TILE_SIZE - (OUTER_MARGIN * 2) - (INNER_GAP * 2);
+      slot.style.overflow = "hidden";
 
-    const slotWidth = usableWidth / GRID_COLS;
-    const slotHeight = usableHeight / GRID_ROWS;
+      const num = String(s).padStart(2, "0");
+      const src = "Concepts/Concept_" + conceptNum + "/images/Concept_" + conceptNum + "_" + num + ".png";
 
-    for (let row = 0; row < GRID_ROWS; row++) {
-      for (let col = 0; col < GRID_COLS; col++) {
+      loadImage(src).then(result => {
+        slot.innerHTML = "";
 
-        const index = row * GRID_COLS + col + 1;
+        if (result.ok) {
+          const img = result.img;
+          img.style.width = "100%";
+          img.style.height = "100%";
+          img.style.objectFit = "cover";
+          slot.appendChild(img);
+        } else {
+          const text = document.createElement("div");
 
-        const slot = document.createElement("div");
-        slot.style.position = "absolute";
+          text.textContent = "Coming\nSoon";
 
-        const top = OUTER_MARGIN + row * (slotHeight + INNER_GAP);
-        const left = OUTER_MARGIN + col * (slotWidth + INNER_GAP);
+          text.style.display = "flex";
+          text.style.flexDirection = "column";
+          text.style.alignItems = "center";
+          text.style.justifyContent = "center";
 
-        slot.style.top = top + "px";
-        slot.style.left = left + "px";
-        slot.style.width = slotWidth + "px";
-        slot.style.height = slotHeight + "px";
+          text.style.width = "100%";
+          text.style.height = "100%";
 
-        slot.style.display = "flex";
-        slot.style.alignItems = "center";
-        slot.style.justifyContent = "center";
-        slot.style.overflow = "hidden";
+          text.style.color = "gold";
+          text.style.fontSize = "10px";
+          text.style.textAlign = "center";
+          text.style.lineHeight = "1.1";
+          text.style.whiteSpace = "pre-line";
 
-        const num = String(index).padStart(2, "0");
-        const src = "Concepts/Concept_" + conceptNum + "/images/Concept_" + conceptNum + "_" + num + ".png";
+          slot.appendChild(text);
+        }
+      });
 
-        loadImage(src).then(result => {
-          if (result.ok) {
-            const img = result.img;
-            img.style.width = "100%";
-            img.style.height = "100%";
-            img.style.objectFit = "cover";
-            slot.innerHTML = "";
-            slot.appendChild(img);
-          } else {
-            slot.innerHTML = "<div style='color:gold;font-size:11px;'>Coming Soon</div>";
-          }
-        });
-
-        preview.appendChild(slot);
-      }
+      preview.appendChild(slot);
     }
 
     const label = document.createElement("div");
@@ -113,13 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
     tile.appendChild(preview);
     tile.appendChild(label);
 
-    return tile;
-  }
-
-  const fragment = document.createDocumentFragment();
-
-  for (let i = 1; i <= positions.length; i++) {
-    fragment.appendChild(buildTile(i));
+    fragment.appendChild(tile);
   }
 
   container.appendChild(fragment);
