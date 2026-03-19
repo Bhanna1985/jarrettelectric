@@ -1,74 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Concept Preview</title>
-<style>
-body{
-margin:0;
-background:black;
-display:flex;
-justify-content:center;
-}
-
-.container{
-position:relative;
-width:1200px;
-}
-
-svg{
-width:100%;
-display:block;
-}
-
-.zone{
-position:absolute;
-width:300px;
-height:300px;
-cursor:pointer;
-}
-
-.backButton{
-position:absolute;
-top:230px;
-left:450px;
-width:300px;
-height:80px;
-cursor:pointer;
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="container">
-
-<div id="svgContainer"></div>
-
-<div class="backButton"></div>
-
-<div class="zone" style="top:360px; left:120px;"></div>
-<div class="zone" style="top:360px; left:680px;"></div>
-
-<div class="zone" style="top:740px; left:120px;"></div>
-<div class="zone" style="top:740px; left:680px;"></div>
-
-<div class="zone" style="top:1120px; left:120px;"></div>
-<div class="zone" style="top:1120px; left:680px;"></div>
-
-</div>
+<div id="preview"></div>
 
 <script>
-fetch('assets/Preview.svg')
-.then(res => res.text())
-.then(svg => {
-document.getElementById('svgContainer').innerHTML = svg;
+const urlParams = new URLSearchParams(window.location.search)
+const concept = urlParams.get("concept")
 
-const numbers = document.querySelectorAll('#conceptNumber');
-numbers.forEach((el, index) => {
-el.textContent = index + 1;
-});
-});
+const preview = document.getElementById("preview")
+
+const container = document.createElement("div")
+container.style.position = "relative"
+container.style.width = "1200px"
+container.style.height = "800px"
+container.style.margin = "auto"
+container.style.backgroundImage = "url('assets/preview_template.png')"
+container.style.backgroundSize = "contain"
+container.style.backgroundRepeat = "no-repeat"
+
+const slots = [
+  { top: 200, left: 300 },
+  { top: 200, left: 500 },
+  { top: 350, left: 300 },
+  { top: 350, left: 500 },
+  { top: 500, left: 300 },
+  { top: 500, left: 500 }
+]
+
+slots.forEach((pos, index) => {
+  const img = document.createElement("img")
+  const num = String(index + 1).padStart(2, '0')
+
+  img.src = "Concepts/Concept_" + concept + "/images/Concept_" + concept + "_" + num + ".png"
+  img.style.position = "absolute"
+  img.style.top = pos.top + "px"
+  img.style.left = pos.left + "px"
+  img.style.width = "150px"
+  img.style.height = "100px"
+  img.style.objectFit = "cover"
+
+  img.onclick = function() {
+    window.location.href = "fullscreen.html?concept=" + concept + "&img=" + num
+  }
+
+  preview.appendChild(img)
+})
+
+preview.appendChild(container)
 </script>
 
 </body>

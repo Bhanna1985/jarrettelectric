@@ -1,98 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Fullscreen View</title>
-<style>
-body{
-margin:0;
-background:black;
-display:flex;
-justify-content:center;
-}
-
-.container{
-position:relative;
-width:1200px;
-}
-
-svg{
-width:100%;
-display:block;
-}
-
-.contentZone{
-position:absolute;
-top:360px;
-left:100px;
-width:1000px;
-height:700px;
-}
-
-.backConcept{
-position:absolute;
-top:240px;
-left:60px;
-width:220px;
-height:80px;
-cursor:pointer;
-}
-
-.backSelector{
-position:absolute;
-top:240px;
-left:330px;
-width:260px;
-height:80px;
-cursor:pointer;
-}
-
-.nextPage{
-position:absolute;
-top:240px;
-left:650px;
-width:260px;
-height:80px;
-cursor:pointer;
-}
-
-.nextConcept{
-position:absolute;
-top:240px;
-left:950px;
-width:220px;
-height:80px;
-cursor:pointer;
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="container">
-
-<div id="svgContainer"></div>
-
-<div class="backConcept"></div>
-<div class="backSelector"></div>
-<div class="nextPage"></div>
-<div class="nextConcept"></div>
-
-<div class="contentZone"></div>
-
-</div>
+<div id="viewer"></div>
 
 <script>
-fetch('assets/Full Screen.svg')
-.then(res => res.text())
-.then(svg => {
-document.getElementById('svgContainer').innerHTML = svg;
+const urlParams = new URLSearchParams(window.location.search)
+const concept = urlParams.get("concept")
+const imgNum = urlParams.get("img")
 
-const numbers = document.querySelectorAll('#conceptNumber');
-numbers.forEach((el, index) => {
-el.textContent = index + 1;
-});
-});
+const viewer = document.getElementById("viewer")
+
+const container = document.createElement("div")
+container.style.position = "relative"
+container.style.width = "1200px"
+container.style.height = "800px"
+container.style.margin = "auto"
+container.style.backgroundImage = "url('assets/fullscreen_template.png')"
+container.style.backgroundSize = "contain"
+container.style.backgroundRepeat = "no-repeat"
+
+const img = document.createElement("img")
+img.src = "Concepts/Concept_" + concept + "/images/Concept_" + concept + "_" + imgNum + ".png"
+img.style.position = "absolute"
+img.style.top = "150px"
+img.style.left = "200px"
+img.style.width = "800px"
+img.style.height = "500px"
+img.style.objectFit = "contain"
+
+viewer.appendChild(container)
+viewer.appendChild(img)
 </script>
 
 </body>
