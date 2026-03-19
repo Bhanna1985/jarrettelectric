@@ -1,10 +1,12 @@
+const BASE = ""
+
 const slots = [
-  { top: 14, left: 14, width: 100, height: 62 },
-  { top: 14, left: 126, width: 100, height: 62 },
-  { top: 90, left: 14, width: 100, height: 62 },
-  { top: 90, left: 126, width: 100, height: 62 },
-  { top: 166, left: 14, width: 100, height: 62 },
-  { top: 166, left: 126, width: 100, height: 62 }
+  { top: 12, left: 12, width: 102, height: 64 },
+  { top: 12, left: 126, width: 102, height: 64 },
+  { top: 88, left: 12, width: 102, height: 64 },
+  { top: 88, left: 126, width: 102, height: 64 },
+  { top: 164, left: 12, width: 102, height: 64 },
+  { top: 164, left: 126, width: 102, height: 64 }
 ]
 
 const positions = [
@@ -32,12 +34,17 @@ for (let i = 1; i <= 8; i++) {
   tile.style.height = "260px"
 
   const template = document.createElement("img")
-  template.src = "./assets/tile_template.png"
+  template.src = BASE + "/assets/tile_template.png"
   template.style.position = "absolute"
   template.style.top = "0"
   template.style.left = "0"
   template.style.width = "240px"
   template.style.height = "240px"
+
+  template.onerror = function () {
+    console.log("TEMPLATE FAILED:", this.src)
+  }
+
   tile.appendChild(template)
 
   const container = document.createElement("div")
@@ -62,12 +69,13 @@ for (let i = 1; i <= 8; i++) {
     cell.style.overflow = "hidden"
 
     const img = document.createElement("img")
-    img.src = "./Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
+    img.src = BASE + "/Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
     img.style.width = "100%"
     img.style.height = "100%"
     img.style.objectFit = "cover"
 
     img.onerror = function () {
+      console.log("MISSING IMAGE:", this.src)
       this.remove()
       cell.innerHTML = "<div style='display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%'>Coming<br>Soon</div>"
     }
