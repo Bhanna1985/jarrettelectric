@@ -1,4 +1,4 @@
-const BASE = "/jarrettelectric"
+const BASE = ""
 
 const slots = [
   { top: 12, left: 12, width: 102, height: 64 },
@@ -22,10 +22,6 @@ const positions = [
 
 const selector = document.getElementById("selector")
 
-if (!selector) {
-  console.error("Selector container missing")
-}
-
 for (let i = 1; i <= 8; i++) {
 
   const concept = String(i).padStart(3, '0')
@@ -44,6 +40,10 @@ for (let i = 1; i <= 8; i++) {
   template.style.left = "0"
   template.style.width = "240px"
   template.style.height = "240px"
+
+  template.onerror = function () {
+    console.log("TEMPLATE FAILED:", this.src)
+  }
 
   tile.appendChild(template)
 
@@ -75,6 +75,7 @@ for (let i = 1; i <= 8; i++) {
     img.style.objectFit = "cover"
 
     img.onerror = function () {
+      console.log("MISSING IMAGE:", this.src)
       this.remove()
       cell.innerHTML = "<div style='display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%'>Coming<br>Soon</div>"
     }
