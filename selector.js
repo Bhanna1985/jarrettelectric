@@ -58,19 +58,8 @@ for (let i = 1; i <= 8; i++) {
     cell.style.left = slot.left + "px"
     cell.style.width = slot.width + "px"
     cell.style.height = slot.height + "px"
-    cell.style.display = "flex"
-    cell.style.alignItems = "center"
-    cell.style.justifyContent = "center"
-    cell.style.flexDirection = "column"
     cell.style.overflow = "hidden"
 
-    const img = document.createElement("img")
-    img.src = BASE + "/Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
-    img.style.width = "100%"
-    img.style.height = "100%"
-    img.style.objectFit = "cover"
-
-    cell.appendChild(img)
     container.appendChild(cell)
 
   })
