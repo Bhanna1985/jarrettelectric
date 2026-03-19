@@ -5,6 +5,10 @@
 <title>Jarrett Electric Preview</title>
 <meta name="viewport" content="width=360, initial-scale=1.0">
 
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
@@ -23,6 +27,7 @@ height:540px;
 position:absolute;
 width:156px;
 height:156px;
+overflow:hidden;
 }
 .frame img{
 position:absolute;
@@ -30,7 +35,7 @@ left:4px;
 top:4px;
 width:148px;
 height:148px;
-object-fit:fill;
+object-fit:cover;
 object-position:center center;
 display:block;
 }
@@ -58,21 +63,27 @@ z-index:10;
 <div class="frame" style="left:15px;top:364px;"><img id="img5"></div>
 <div class="frame" style="left:189px;top:364px;"><img id="img6"></div>
 
-<img id="overlay" src="assets/preview_template.png">
+<img id="overlay" src="./assets/preview_template.png?cb=__CACHE__">
 </div>
 
 <script>
 (function(){
+const ts=Date.now();
 const params=new URLSearchParams(window.location.search);
 let concept=params.get("concept")||"001";
 concept=concept.replace(/\D/g,"").padStart(3,"0");
 
+/* HARD VERIFIED RELATIVE PATH */
 const base="./Concepts/Concept_"+concept+"/images/";
 
 for(let i=1;i<=6;i++){
 const n=String(i).padStart(2,"0");
-document.getElementById("img"+i).src=base+"Concept_"+concept+"_"+n+".png";
+const el=document.getElementById("img"+i);
+el.src="";
+el.src=base+"Concept_"+concept+"_"+n+".png?cb="+ts;
 }
+
+document.getElementById("overlay").src="./assets/preview_template.png?cb="+ts;
 })();
 </script>
 
