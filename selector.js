@@ -1,12 +1,12 @@
 const BASE = "/jarrettelectric"
 
 const slots = [
-  { top: 12, left: 12, width: 102, height: 64 },
-  { top: 12, left: 126, width: 102, height: 64 },
-  { top: 88, left: 12, width: 102, height: 64 },
-  { top: 88, left: 126, width: 102, height: 64 },
-  { top: 164, left: 12, width: 102, height: 64 },
-  { top: 164, left: 126, width: 102, height: 64 }
+  { top: 14, left: 14, width: 96, height: 60 },
+  { top: 14, left: 130, width: 96, height: 60 },
+  { top: 92, left: 14, width: 96, height: 60 },
+  { top: 92, left: 130, width: 96, height: 60 },
+  { top: 170, left: 14, width: 96, height: 60 },
+  { top: 170, left: 130, width: 96, height: 60 }
 ]
 
 const positions = [
@@ -21,10 +21,6 @@ const positions = [
 ]
 
 const selector = document.getElementById("selector")
-
-if (!selector) {
-  console.error("Selector container missing")
-}
 
 for (let i = 1; i <= 8; i++) {
 
@@ -73,11 +69,6 @@ for (let i = 1; i <= 8; i++) {
     img.style.width = "100%"
     img.style.height = "100%"
     img.style.objectFit = "cover"
-
-    img.onerror = function () {
-      this.remove()
-      cell.innerHTML = "<div style='display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%'>Coming<br>Soon</div>"
-    }
 
     cell.appendChild(img)
     container.appendChild(cell)
