@@ -60,6 +60,13 @@ for (let i = 1; i <= 8; i++) {
     cell.style.height = slot.height + "px"
     cell.style.overflow = "hidden"
 
+    const img = document.createElement("img")
+    img.src = BASE + "/Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
+    img.style.width = "100%"
+    img.style.height = "100%"
+    img.style.objectFit = "cover"
+
+    cell.appendChild(img)
     container.appendChild(cell)
 
   })
