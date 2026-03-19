@@ -34,7 +34,7 @@ for (let i = 1; i <= 8; i++) {
   tile.style.height = "260px"
 
   const template = document.createElement("img")
-  template.src = BASE + "/assets/tile_template.png"
+  template.src = BASE + "/assets/tile_template.png?v=1773912582"
   template.style.position = "absolute"
   template.style.top = "0"
   template.style.left = "0"
@@ -61,7 +61,7 @@ for (let i = 1; i <= 8; i++) {
     cell.style.overflow = "hidden"
 
     const img = document.createElement("img")
-    img.src = BASE + "/Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
+    img.src = BASE + "/Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png?v=1773912582"
     img.style.width = "100%"
     img.style.height = "100%"
     img.style.objectFit = "cover"
