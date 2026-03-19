@@ -1,14 +1,11 @@
 const slots = [
-  { top: 8, left: 8, width: 108, height: 68 },
-  { top: 8, left: 124, width: 108, height: 68 },
-  { top: 86, left: 8, width: 108, height: 68 },
-  { top: 86, left: 124, width: 108, height: 68 },
-  { top: 164, left: 8, width: 108, height: 68 },
-  { top: 164, left: 124, width: 108, height: 68 }
+  { top: 12, left: 12, width: 102, height: 64 },
+  { top: 12, left: 126, width: 102, height: 64 },
+  { top: 88, left: 12, width: 102, height: 64 },
+  { top: 88, left: 126, width: 102, height: 64 },
+  { top: 164, left: 12, width: 102, height: 64 },
+  { top: 164, left: 126, width: 102, height: 64 }
 ]
-
-const SLOT_WIDTH = 108
-const SLOT_HEIGHT = 68
 
 const positions = [
   { top: 300, left: 80 },
@@ -35,7 +32,7 @@ for (let i = 1; i <= 8; i++) {
   tile.style.height = "260px"
 
   const template = document.createElement("img")
-  template.src = "assets/tile_template.png"
+  template.src = "./assets/tile_template.png"
   template.style.position = "absolute"
   template.style.top = "0"
   template.style.left = "0"
@@ -65,14 +62,14 @@ for (let i = 1; i <= 8; i++) {
     cell.style.overflow = "hidden"
 
     const img = document.createElement("img")
-    img.src = "Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
+    img.src = "./Concepts/Concept_" + concept + "/images/Concept_" + concept + "_0" + (index + 1) + ".png"
     img.style.width = "100%"
     img.style.height = "100%"
     img.style.objectFit = "cover"
 
     img.onerror = function () {
       this.remove()
-      cell.innerHTML = "<div>Coming<br>Soon</div>"
+      cell.innerHTML = "<div style='display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%'>Coming<br>Soon</div>"
     }
 
     cell.appendChild(img)
