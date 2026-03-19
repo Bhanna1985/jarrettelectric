@@ -1,56 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Jarrett Electric Preview</title>
+<meta name="viewport" content="width=360, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+#stage{
+position:relative;
+width:360px;
+height:540px;
+}
+.slot{
+position:absolute;
+width:148px;
+height:148px;
+object-fit:cover;
+object-position:center center;
+}
+#overlay{
+position:absolute;
+left:0;
+top:0;
+width:360px;
+height:540px;
+pointer-events:none;
+z-index:10;
+}
+</style>
 </head>
 <body>
 
-<div id="preview"></div>
+<div id="stage">
+<img id="img1" class="slot" style="left:19px;top:20px;">
+<img id="img2" class="slot" style="left:193px;top:20px;">
+<img id="img3" class="slot" style="left:19px;top:194px;">
+<img id="img4" class="slot" style="left:193px;top:194px;">
+<img id="img5" class="slot" style="left:19px;top:368px;">
+<img id="img6" class="slot" style="left:193px;top:368px;">
+
+<img id="overlay" src="assets/preview_template.png" alt="">
+</div>
 
 <script>
-const urlParams = new URLSearchParams(window.location.search)
-const concept = urlParams.get("concept")
+(function(){
+const params=new URLSearchParams(window.location.search);
+let concept=params.get("concept")||"001";
+concept=concept.replace(/\D/g,"").padStart(3,"0");
 
-const preview = document.getElementById("preview")
+const base="Concepts/Concept_"+concept+"/images/";
 
-const container = document.createElement("div")
-container.style.position = "relative"
-container.style.width = "1200px"
-container.style.height = "800px"
-container.style.margin = "auto"
-container.style.backgroundImage = "url('assets/preview_template.png')"
-container.style.backgroundSize = "contain"
-container.style.backgroundRepeat = "no-repeat"
-
-const slots = [
-  { top: 200, left: 300 },
-  { top: 200, left: 500 },
-  { top: 350, left: 300 },
-  { top: 350, left: 500 },
-  { top: 500, left: 300 },
-  { top: 500, left: 500 }
-]
-
-slots.forEach((pos, index) => {
-  const img = document.createElement("img")
-  const num = String(index + 1).padStart(2, '0')
-
-  img.src = "Concepts/Concept_" + concept + "/images/Concept_" + concept + "_" + num + ".png"
-  img.style.position = "absolute"
-  img.style.top = pos.top + "px"
-  img.style.left = pos.left + "px"
-  img.style.width = "150px"
-  img.style.height = "100px"
-  img.style.objectFit = "cover"
-
-  img.onclick = function() {
-    window.location.href = "fullscreen.html?concept=" + concept + "&img=" + num
-  }
-
-  preview.appendChild(img)
-})
-
-preview.appendChild(container)
+for(let i=1;i<=6;i++){
+const n=String(i).padStart(2,"0");
+const el=document.getElementById("img"+i);
+el.src=base+"Concept_"+concept+"_"+n+".png";
+}
+})();
 </script>
 
 </body>
